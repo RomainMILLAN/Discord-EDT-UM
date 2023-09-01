@@ -25,7 +25,7 @@ function sendUptime() {
                     fields: [
                         {
                             name: "Service name",
-                            value: "Discord EDT UM"
+                            value: "EDT UM"
                         },
                         {
                             name: "State",
