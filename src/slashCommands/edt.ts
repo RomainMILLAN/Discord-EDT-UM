@@ -36,6 +36,7 @@ export const command: SlashCommand = {
         }),
     execute: async (interaction) => {
         const groupe = interaction.options.get("groupe").value.toString();
+        const dashboardUrl = process.env.DASHBOARD_URL;
         var date = "";
 
         if(interaction.options.get("date") === null) {
@@ -47,7 +48,7 @@ export const command: SlashCommand = {
         let embedDescription = `Liste des cours: \n`
 
 
-        fetch('https://127.0.0.1:8000/fr/api/edt/class/day/' + groupe + "/" + date).then(response => {
+        fetch(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date).then(response => {
             response.json().then(json => {
 
                 if(json.length == 0) {

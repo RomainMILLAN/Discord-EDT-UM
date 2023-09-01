@@ -41,6 +41,7 @@ exports.command = {
     }),
     execute: (interaction) => __awaiter(void 0, void 0, void 0, function* () {
         const groupe = interaction.options.get("groupe").value.toString();
+        const dashboardUrl = process.env.DASHBOARD_URL;
         var date = "";
         if (interaction.options.get("date") === null) {
             const nowDate = new Date();
@@ -50,7 +51,7 @@ exports.command = {
             date = interaction.options.get("date").value.toString();
         }
         let embedDescription = `Liste des cours: \n`;
-        fetch('https://127.0.0.1:8000/fr/api/edt/class/day/' + groupe + "/" + date).then(response => {
+        fetch(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date).then(response => {
             response.json().then(json => {
                 if (json.length == 0) {
                     embedDescription += `*Aucun cours aujourd'hui*`;
