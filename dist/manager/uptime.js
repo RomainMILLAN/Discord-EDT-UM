@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendUptime = void 0;
 function sendUptime() {
     return __awaiter(this, void 0, void 0, function* () {
-        if (process.env.APP_ENV !== 'production')
+        if (process.env.APP_ENV !== 'PROD')
             return;
         const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
         if (discordWebhookUrl === "")

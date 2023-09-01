@@ -1,7 +1,7 @@
 import { sendConsole, sendDebug } from "./consoleManager";
 
 export async function sendUptime() {
-    if(process.env.APP_ENV !== 'production') return;
+    if(process.env.APP_ENV !== 'PROD') return;
 
     const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
     if(discordWebhookUrl === "") return;
