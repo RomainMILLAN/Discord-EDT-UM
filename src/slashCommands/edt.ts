@@ -71,11 +71,12 @@ export const command: SlashCommand = {
                         new EmbedBuilder()
                             .setTitle(`📚 Cours du (${date}})`)
                             .setAuthor({
-                                name: "Discord EDT UM"
+                                name: "EDT UM"
                             })
                             .setDescription(embedDescription)
                             .setColor("Purple")
-                    ]
+                    ],
+                    ephemeral: true
                 })
                 
             })

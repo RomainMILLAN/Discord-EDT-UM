@@ -70,11 +70,12 @@ exports.command = {
                         new discord_js_1.EmbedBuilder()
                             .setTitle(`📚 Cours du (${date}})`)
                             .setAuthor({
-                            name: "Discord EDT UM"
+                            name: "EDT UM"
                         })
                             .setDescription(embedDescription)
                             .setColor("Purple")
-                    ]
+                    ],
+                    ephemeral: true
                 });
             });
         });
