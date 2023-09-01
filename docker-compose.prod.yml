@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  ts-node-docker:
+    build:
+      target: production
+    environment:
+      - APP_ID=1088374648695181352
+      - BOT_TOKEN=MTA4ODM3NDY0ODY5NTE4MTM1Mg.G0SIey.af6Q6taO4ordShqpAffWVJ9gmn8Oj_EkQJ9Ogs
+      - GUILD_ID=884757095294042143
+      - R_OP=886543544666451999
+      - R_STAFF=1039466605719072848
+      - TC_SENTRY=1088375925445496902
+      - APP_ENV=PROD
+      - APP_DEBUGING=FALSE
+      - DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/1146103623873470505/7NpLTPzM9eSIUl0pViwg-FzBMw2vC25ABTiEzWnV3MS7YfcQahdbhD4KlYgp63LavjIU
+      - DASHBOARD_URL=https://admin.romainmillan.fr/fr
+    command: npm run start
