@@ -1,4 +1,4 @@
-import { Client, Collection, GatewayIntentBits } from "discord.js";
+import { ActivityType, Client, Collection, GatewayIntentBits } from "discord.js";
 import * as dotenv from "dotenv";
 import { readdirSync } from "fs";
 import { join } from "path";
@@ -10,7 +10,14 @@ const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
-    ]
+    ],
+    presence: {
+        status: 'online',
+        activities: [{
+            name: '/edt',
+            type: ActivityType.Watching
+        }]
+    }
 });
 
 client.slashCommands = new Collection<string, SlashCommand>();

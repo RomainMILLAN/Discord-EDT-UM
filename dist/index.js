@@ -32,7 +32,14 @@ const client = new discord_js_1.Client({
     intents: [
         discord_js_1.GatewayIntentBits.Guilds,
         discord_js_1.GatewayIntentBits.GuildMessages,
-    ]
+    ],
+    presence: {
+        status: 'online',
+        activities: [{
+                name: '/edt',
+                type: discord_js_1.ActivityType.Watching
+            }]
+    }
 });
 client.slashCommands = new discord_js_1.Collection();
 const handlersDirs = (0, path_1.join)(__dirname, "./handlers");
