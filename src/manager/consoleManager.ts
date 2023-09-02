@@ -23,6 +23,17 @@ export function sendDebug(body: string) {
     )
 }
 
+export function sendError(body: string) {
+
+    console.log(
+        "\x1b[1m[" + date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear() + "]\x1b[0m "
+        +
+         "\x1b[41mERROR\x1b[0m "
+        +
+        body
+    )
+}
+
 export function sendConsole(body: string) {
 
     console.log(
