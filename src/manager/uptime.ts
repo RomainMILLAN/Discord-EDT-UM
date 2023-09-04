@@ -1,4 +1,5 @@
 import { sendConsole, sendDebug } from "./consoleManager";
+import sentry from "./sentry";
 
 export async function sendUptime() {
     if(process.env.APP_ENV !== 'PROD') return;

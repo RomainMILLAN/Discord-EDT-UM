@@ -1,7 +1,7 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { SlashCommand } from "../../types";
 import { sendDebug } from "../manager/consoleManager";
-import { start } from "repl";
+import sentry from "../manager/sentry";
 
 export const command: SlashCommand = {
     name: "edt",
@@ -47,8 +47,10 @@ export const command: SlashCommand = {
         }
         let embedDescription = `Liste des cours: \n`
 
+        console.log(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date);
 
         fetch(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date).then(response => {
+
             response.json().then(json => {
 
                 if(json.length == 0) {
@@ -78,7 +80,6 @@ export const command: SlashCommand = {
                     ],
                     ephemeral: true
                 })
-                
             })
         })
     }

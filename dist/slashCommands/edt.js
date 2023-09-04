@@ -1,13 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.command = void 0;
 const discord_js_1 = require("discord.js");
@@ -39,7 +30,7 @@ exports.command = {
             .setDescription("Date de l'emploi du temp")
             .setRequired(false);
     }),
-    execute: (interaction) => __awaiter(void 0, void 0, void 0, function* () {
+    execute: async (interaction) => {
         const groupe = interaction.options.get("groupe").value.toString();
         const dashboardUrl = process.env.DASHBOARD_URL;
         var date = "";
@@ -51,6 +42,7 @@ exports.command = {
             date = interaction.options.get("date").value.toString();
         }
         let embedDescription = `Liste des cours: \n`;
+        console.log(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date);
         fetch(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date).then(response => {
             response.json().then(json => {
                 if (json.length == 0) {
@@ -79,5 +71,5 @@ exports.command = {
                 });
             });
         });
-    })
+    }
 };
