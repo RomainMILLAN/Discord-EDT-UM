@@ -47,8 +47,6 @@ export const command: SlashCommand = {
         }
         let embedDescription = `Liste des cours: \n`
 
-        console.log(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date);
-
         fetch(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date).then(response => {
 
             response.json().then(json => {
@@ -71,7 +69,7 @@ export const command: SlashCommand = {
                 interaction.reply({
                     embeds: [
                         new EmbedBuilder()
-                            .setTitle(`📚 Cours du (${date}})`)
+                            .setTitle(`📚 Cours du (${date})`)
                             .setAuthor({
                                 name: "EDT UM"
                             })

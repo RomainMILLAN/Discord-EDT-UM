@@ -42,7 +42,6 @@ exports.command = {
             date = interaction.options.get("date").value.toString();
         }
         let embedDescription = `Liste des cours: \n`;
-        console.log(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date);
         fetch(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date).then(response => {
             response.json().then(json => {
                 if (json.length == 0) {
@@ -60,7 +59,7 @@ exports.command = {
                 interaction.reply({
                     embeds: [
                         new discord_js_1.EmbedBuilder()
-                            .setTitle(`📚 Cours du (${date}})`)
+                            .setTitle(`📚 Cours du (${date})`)
                             .setAuthor({
                             name: "EDT UM"
                         })
