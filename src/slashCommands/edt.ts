@@ -41,14 +41,15 @@ export const command: SlashCommand = {
 
         if(interaction.options.get("date") === null) {
             const nowDate = new Date();
-            date = nowDate.toLocaleDateString();
+            date = nowDate.getDate() + '/' + (nowDate.getMonth()+1) + '/' + nowDate.getFullYear();
         }else {
             date = interaction.options.get("date").value.toString();
         }
         let embedDescription = `Liste des cours: \n`
 
-        fetch(dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date).then(response => {
-
+        let url = dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date
+        sendDebug(url);
+        fetch(url).then(response => {
             response.json().then(json => {
 
                 if(json.length == 0) {
