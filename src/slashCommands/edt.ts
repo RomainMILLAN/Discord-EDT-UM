@@ -50,9 +50,6 @@ export const command: SlashCommand = {
         sendDebug(url);
         fetch(url).then(response => {
             response.json().then(json => {
-                console.log(json);
-
-
                 if(json.length == 0) {
                     embedDescription += `*Aucun cours aujourd'hui*`
                 }
