@@ -1,7 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { SlashCommand } from "../../types";
 import { sendDebug } from "../manager/consoleManager";
-import sentry from "../manager/sentry";
 
 export const command: SlashCommand = {
     name: "edt",
@@ -51,6 +50,8 @@ export const command: SlashCommand = {
         sendDebug(url);
         fetch(url).then(response => {
             response.json().then(json => {
+                console.log(json);
+
 
                 if(json.length == 0) {
                     embedDescription += `*Aucun cours aujourd'hui*`
@@ -59,9 +60,13 @@ export const command: SlashCommand = {
                 let index = 0;
                 while(index < json.length) {
                     const startDate = new Date(json[index]['dtstart']);
+                    const startHours = startDate.getHours() + (Math.abs(startDate.getTimezoneOffset())/60);
+                    const startMinutes = (startDate.getMinutes() < 10 ? '0' : '') + startDate.getMinutes();
                     const endDate = new Date(json[index]['dtend']);
+                    const endHours = endDate.getHours() + (Math.abs(endDate.getTimezoneOffset())/60);
+                    const endMinutes = (endDate.getMinutes() < 10 ? '0' : '') + endDate.getMinutes();
                     //■ [1488] WEBER MARIE LAURE Intro GSI - 08:30/10:30
-                    embedDescription += `■ **${json[index]['name']}** - \`${startDate.getHours()}:${startDate.getMinutes()}\`/\`${endDate.getHours()}:${endDate.getMinutes()}\` \n`;
+                    embedDescription += `■ **${json[index]['name']}** - \`${startHours}:${startMinutes}\`/\`${endHours}:${endMinutes}\` \n`;
 
                     index++;
                 }
