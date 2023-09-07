@@ -49,6 +49,35 @@ export const command: SlashCommand = {
         let url = dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date
         sendDebug(url);
         fetch(url).then(response => {
+
+            if(response.status == 503) {
+                interaction.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setTitle(`📚 EDT UM`)
+                            .setDescription(`Service en maintenance (*Status code: ${response.status}*)`)
+                            .setColor("Red")
+                    ],
+                    ephemeral: true
+                })
+
+                return;
+            }
+
+            if(response.status != 200 && response.status != 503) {
+                interaction.reply({
+                    embeds: [
+                        new EmbedBuilder()
+                            .setTitle(`📚 EDT UM`)
+                            .setDescription(`Erreur de serveur interne (*Status code: ${response.status}*)\n Merci de le referre au créateur.`)
+                            .setColor("Red")
+                    ],
+                    ephemeral: true
+                })
+
+                return;
+            }
+
             response.json().then(json => {
                 if(json.length == 0) {
                     embedDescription += `*Aucun cours aujourd'hui*`
@@ -81,6 +110,8 @@ export const command: SlashCommand = {
                     ],
                     ephemeral: true
                 })
+
+                return;
             })
         })
     }

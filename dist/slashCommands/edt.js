@@ -45,6 +45,31 @@ exports.command = {
         let url = dashboardUrl + '/api/edt/class/day/' + groupe + "/" + date;
         (0, consoleManager_1.sendDebug)(url);
         fetch(url).then(response => {
+            console.log(response.status);
+            if (response.status == 503) {
+                interaction.reply({
+                    embeds: [
+                        new discord_js_1.EmbedBuilder()
+                            .setTitle(`📚 EDT UM`)
+                            .setDescription(`Service en maintenance (*Status code: ${response.status}*)`)
+                            .setColor("Red")
+                    ],
+                    ephemeral: true
+                });
+                return;
+            }
+            if (response.status != 200 && response.status != 503) {
+                interaction.reply({
+                    embeds: [
+                        new discord_js_1.EmbedBuilder()
+                            .setTitle(`📚 EDT UM`)
+                            .setDescription(`Erreur de serveur interne (*Status code: ${response.status}*)\n Merci de le referre au créateur.`)
+                            .setColor("Red")
+                    ],
+                    ephemeral: true
+                });
+                return;
+            }
             response.json().then(json => {
                 if (json.length == 0) {
                     embedDescription += `*Aucun cours aujourd'hui*`;
@@ -74,6 +99,7 @@ exports.command = {
                     ],
                     ephemeral: true
                 });
+                return;
             });
         });
     }
