@@ -9,7 +9,7 @@ services:
     volumes:
       - ./src:/home/node/app/src
       - ./node_modules.json:/home/node/app/nodemon.json
-    container_name: ts-node-docker
+    container_name: discord-edt-um
     environment:
         - TZ=Europe/Paris
     command: npm run start
